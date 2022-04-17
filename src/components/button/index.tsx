@@ -1,9 +1,18 @@
 import React from "react";
-import { Button as BaseButton } from "antd";
-import { ButtonProps } from "antd/lib/button";
+import styled from "styled-components";
 
-export type IButton = ButtonProps;
+interface PixelProps {
+  size: number;
+  bgColor: string;
+}
 
-export const Button: React.FC<IButton> = ({ ...rest }) => {
-  return <BaseButton {...rest} />;
+export const Pixel: React.FC<PixelProps> = ({ size, bgColor = "pink" }) => {
+  return <Container size={size} bgColor={bgColor}></Container>;
 };
+
+const Container = styled.div`
+  width: ${(props) => props.size}px;
+  height: ${(props) => props.size}px;
+  background-color: ${(props) => props.bgColor};
+  border: 1px solid black;
+`;
