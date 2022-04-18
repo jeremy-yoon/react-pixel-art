@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 interface PixelProps {
+  onClick: Function;
   size: number;
   bgColor: string;
   index: number;
@@ -9,9 +10,16 @@ interface PixelProps {
   y: number;
 }
 
-export const Pixel: React.FC<PixelProps> = ({ size, bgColor, index, x, y }) => {
+export const Pixel: React.FC<PixelProps> = ({
+  onClick,
+  size,
+  bgColor,
+  index,
+  x,
+  y,
+}) => {
   return (
-    <Container size={size} bgColor={bgColor}>
+    <Container size={size} bgColor={bgColor} onClick={onClick && onClick}>
       {/* <div style={{ color: "gray" }}>{index}</div> */}
       <div>
         {x},{y}
