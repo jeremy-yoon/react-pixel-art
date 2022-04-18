@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { Pixel } from "components";
 
 const Home: React.FC = () => {
-  const [pixelSize, setPixelSize] = useState(10);
-  const [width, setWidth] = useState(20);
+  const [pixelSize, setPixelSize] = useState(50);
+  const [width, setWidth] = useState(10);
   const [height, setHeight] = useState(10);
 
   const [pixels, setPixels] = useState([]);
@@ -33,9 +33,17 @@ const Home: React.FC = () => {
         background: "#fafafa",
       }}
     >
-      <Grid width={width}>
+      <Grid width={width} pixelSize={pixelSize}>
         {pixels.map((pixel, index) => {
-          return <Pixel key={index} size={pixelSize} bgColor="pink" />;
+          return (
+            <Pixel
+              index={index}
+              x={index % width}
+              y={Math.floor(index / height)}
+              size={pixelSize}
+              bgColor="white"
+            />
+          );
         })}
       </Grid>
     </div>
@@ -44,7 +52,8 @@ const Home: React.FC = () => {
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: ${(props) => `repeat(${props.width}, 10px)`};
+  grid-template-columns: ${(props) =>
+    `repeat(${props.width}, ${props.pixelSize}px)`};
 `;
 
 export default Home;
