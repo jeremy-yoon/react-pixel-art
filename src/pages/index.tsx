@@ -68,16 +68,21 @@ const Home: React.FC = () => {
           );
         })}
       </Grid>
-      {colors.map((color, index) => {
-        return (
-          <ColorButton
-            onClick={() => setSelectedColor(colors[index])}
-            selected={selectedColor === color}
-            // selected={index === selectedColor}
-            color={color}
-          />
-        );
-      })}
+      <span>선택한 색</span>
+      <ColorButton color={selectedColor} />
+      <span>파레트</span>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        {colors.map((color, index) => {
+          return (
+            <ColorButton
+              onClick={() => setSelectedColor(colors[index])}
+              selected={selectedColor === color}
+              // selected={index === selectedColor}
+              color={color}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

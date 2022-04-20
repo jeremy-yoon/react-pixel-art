@@ -29,9 +29,6 @@ export const Pixel: React.FC<PixelProps> = ({
 };
 
 const Container = styled.div`
-  :hover {
-    background: gray;
-  }
   cursor: pointer;
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
