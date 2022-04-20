@@ -36,7 +36,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     repeatPixel();
-  }, [width]);
+  }, []);
 
   return (
     <div
@@ -47,6 +47,19 @@ const Home: React.FC = () => {
         background: "#fafafa",
       }}
     >
+      <span>가로 픽셀</span>
+      <input
+        type="number"
+        value={width}
+        onChange={(e) => setWidth(parseInt(e.target.value))}
+      />
+      <span>세로 픽셀</span>
+      <input
+        type="number"
+        value={height}
+        onChange={(e) => setHeight(parseInt(e.target.value))}
+      />
+
       <Grid width={width} pixelSize={pixelSize}>
         {pixels.map((pixel, index) => {
           return (
