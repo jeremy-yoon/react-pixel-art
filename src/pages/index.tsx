@@ -14,14 +14,13 @@ const Home: React.FC = () => {
   const [selectedColor, setSelectedColor] = useState("");
 
   const repeatPixel = () => {
+    setPixels([]);
     for (let i = 0; i < width * height; i++) {
       setPixels((prevPixels) => [...prevPixels, { size: pixelSize, index: i }]);
     }
   };
 
   const onClickPixel = (index: number, hex: string) => {
-    // console.log(index, x, y, hex);
-    // setColorInfo((prevColorInfo) => [...prevColorInfo, { index, x, y, hex }]);
     if (pixels.find((pixel) => pixel.index === index)) {
       setPixels((prevPixels) =>
         prevPixels.map((pixel) => {
@@ -59,22 +58,16 @@ const Home: React.FC = () => {
         value={height}
         onChange={(e) => setHeight(parseInt(e.target.value))}
       />
+      <ApplyButton onClick={repeatPixel}>적용</ApplyButton>
 
       <Grid width={width} pixelSize={pixelSize}>
         {pixels.map((pixel, index) => {
           return (
             <Pixel
-              onClick={() =>
-                onClickPixel(
-                  index,
-                  // index % width,
-                  // Math.floor(index / height),
-                  selectedColor
-                )
-              }
+              onClick={() => onClickPixel(index, selectedColor)}
               index={index}
               x={index % width}
-              y={Math.floor(index / height)}
+              y={Math.floor(index / width)}
               size={pixelSize}
               bgColor={pixel.bgColor}
             />
@@ -111,6 +104,12 @@ const ColorButton = styled.button`
   height: 100px;
   background: ${(props) => props.color};
   border: 1px solid black;
+`;
+
+const ApplyButton = styled.button`
+  margin: 16px 0;
+  width: 80px;
+  height: 40px;
 `;
 
 export default Home;
