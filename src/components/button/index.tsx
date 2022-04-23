@@ -29,6 +29,8 @@ export const Pixel: React.FC<PixelProps> = ({
 const S: any = {};
 
 S.Container = styled.div`
+  //prevent mouse drag
+  -webkit-user-select: none;
   cursor: pointer;
   width: ${(props) => props.size}px;
   height: ${(props) => props.size}px;
