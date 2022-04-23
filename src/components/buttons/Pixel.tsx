@@ -9,27 +9,30 @@ interface PixelProps {
   index: number;
   x: number;
   y: number;
+  key: any;
 }
 
-export const Pixel: React.FC<PixelProps> = ({
+const Pixel: React.FC<PixelProps> = ({
   onClick,
   size,
   bgColor,
   index,
   x,
   y,
+  key,
 }) => {
   return (
-    <S.Container size={size} bgColor={bgColor} onClick={onClick && onClick}>
-      {/* {x},{y} */}
-    </S.Container>
+    <S.Container
+      key={key}
+      size={size}
+      bgColor={bgColor}
+      onClick={onClick && onClick}
+    ></S.Container>
   );
 };
-
 const S: any = {};
 
 S.Container = styled.div`
-  //prevent mouse drag
   -webkit-user-select: none;
   cursor: pointer;
   width: ${(props) => props.size}px;
@@ -37,9 +40,6 @@ S.Container = styled.div`
   background-color: ${(props) => props.bgColor};
   border-bottom: 1px solid black;
   border-right: 1px solid black;
-
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
+
+export default React.memo(Pixel);

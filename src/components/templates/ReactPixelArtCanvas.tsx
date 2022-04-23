@@ -1,10 +1,35 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import uuid from "react-uuid";
 
-import { Sv, St, Pixel, CanvasPreview } from "components";
+import { Sv, St, PixelsContainer, CanvasPreview } from "components";
 
-export const ReactPixelArtCanvas: React.FC = () => {
-  const [pixelSize, setPixelSize] = useState(50);
+interface ColorButtonProps {}
+
+const ColorButton: React.FC<ColorButtonProps> = ({}) => {
+  const [selectedColor, setSelectedColor] = useState("");
+  const [colors, setColors] = useState(["#ff0000", "#00ff00", "#0000ff"]);
+  return (
+    <>
+      <St text="선택한 색" mt={16} />
+      <S.ColorButton color={selectedColor} />
+      <St text="파레트" mt={16} />
+      <Sv row>
+        {colors.map((color, index) => {
+          return (
+            <S.ColorButton
+              onClick={() => setSelectedColor(colors[index])}
+              selected={selectedColor === color}
+              color={color}
+            />
+          );
+        })}
+      </Sv>
+    </>
+  );
+};
+
+const ReactPixelArtCanvas: React.FC = () => {
   const [width, setWidth] = useState(10);
   const [height, setHeight] = useState(10);
 
@@ -13,33 +38,23 @@ export const ReactPixelArtCanvas: React.FC = () => {
 
   const [pixels, setPixels] = useState([]);
 
-  const [colors, setColors] = useState(["#ff0000", "#00ff00", "#0000ff"]);
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState("red");
 
-  const repeatPixel = () => {
-    setPixels([]);
-    for (let i = 0; i < appliedWidth * appliedHeight; i++) {
-      setPixels((prevPixels) => [...prevPixels, { size: pixelSize, index: i }]);
-    }
-  };
+  // const applyWidthAndHeight = () => {
+  //   setAppliedWidth(width);
+  //   setAppliedHeight(height);
+  //   repeatPixel();
+  // };
 
-  const onClickPixel = (index: number, hex: string) => {
-    let newPixels = [...pixels];
-    newPixels[index].bgColor = hex;
-    setPixels(newPixels);
-  };
+  // useEffect(() => {
+  //   if (appliedWidth === width && appliedHeight === height) {
+  //     repeatPixel();
+  //   }
+  // }, [appliedWidth, appliedHeight]);
 
-  const applyWidthAndHeight = () => {
-    setAppliedWidth(width);
-    setAppliedHeight(height);
-    repeatPixel();
-  };
-
-  useEffect(() => {
-    if (appliedWidth === width && appliedHeight === height) {
-      repeatPixel();
-    }
-  }, [appliedWidth, appliedHeight]);
+  // useEffect(() => {
+  //   console.log(pixels);
+  // }, [pixels]);
 
   return (
     <>
@@ -56,56 +71,29 @@ export const ReactPixelArtCanvas: React.FC = () => {
           value={height}
           onChange={(e) => setHeight(parseInt(e.target.value))}
         />
-        <S.ApplyButton onClick={applyWidthAndHeight}>적용</S.ApplyButton>
+        {/* <S.ApplyButton onClick={applyWidthAndHeight}>적용</S.ApplyButton> */}
 
-        <S.PixelsContainer appliedWidth={appliedWidth} pixelSize={pixelSize}>
-          {pixels.map((pixel, index) => {
-            return (
-              <Pixel
-                onClick={() => onClickPixel(index, selectedColor)}
-                index={index}
-                x={index % appliedWidth}
-                y={Math.floor(index / appliedWidth)}
-                size={pixelSize}
-                bgColor={pixel.bgColor}
-              />
-            );
-          })}
-        </S.PixelsContainer>
-        <St text="선택한 색" mt={16} />
-        <S.ColorButton color={selectedColor} />
-        <St text="파레트" mt={16} />
-        <Sv row>
-          {colors.map((color, index) => {
-            return (
-              <S.ColorButton
-                onClick={() => setSelectedColor(colors[index])}
-                selected={selectedColor === color}
-                color={color}
-              />
-            );
-          })}
-        </Sv>
+        <PixelsContainer
+          appliedWidth={appliedWidth}
+          appliedHeight={appliedHeight}
+          selectedColor={selectedColor}
+          pixels={pixels}
+          setPixels={setPixels}
+        />
+
+        <ColorButton />
       </Sv>
-      <CanvasPreview
+      {/* <CanvasPreview
         width={width}
         height={height}
         pixels={pixels}
         setPixels={setPixels}
-      />
+      /> */}
     </>
   );
 };
 
 const S: any = {};
-
-S.PixelsContainer = styled.div`
-  display: grid;
-  grid-template-columns: ${(props) =>
-    `repeat(${props.appliedWidth}, ${props.pixelSize}px)`};
-  border-top: 1px solid black;
-  border-left: 1px solid black;
-`;
 
 S.ColorButton = styled.button`
   width: 100px;
@@ -119,3 +107,5 @@ S.ApplyButton = styled.button`
   width: 80px;
   height: 40px;
 `;
+
+export default React.memo(ReactPixelArtCanvas);

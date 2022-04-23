@@ -16,7 +16,7 @@ export const CanvasPreview: React.FC<CanvasPreviewProps> = ({
   pixels,
   setPixels,
 }) => {
-  const [pixelSize, setPixelSize] = useState(10);
+  const [pixelSize, setPixelSize] = useState(1);
 
   const repeatPixel = () => {
     setPixels([]);
