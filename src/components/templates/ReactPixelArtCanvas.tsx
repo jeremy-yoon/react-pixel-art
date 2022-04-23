@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { Sv, St, Pixel } from "components";
+import { Sv, St, Pixel, CanvasPreview } from "components";
 
 export const ReactPixelArtCanvas: React.FC = () => {
   const [pixelSize, setPixelSize] = useState(50);
@@ -49,50 +49,58 @@ export const ReactPixelArtCanvas: React.FC = () => {
   }, [appliedWidth, appliedHeight]);
 
   return (
-    <Sv col>
-      <St text="가로 픽셀" />
-      <input
-        type="number"
-        value={width}
-        onChange={(e) => setWidth(parseInt(e.target.value))}
-      />
-      <St text="세로 픽셀" />
-      <input
-        type="number"
-        value={height}
-        onChange={(e) => setHeight(parseInt(e.target.value))}
-      />
-      <S.ApplyButton onClick={applyWidthAndHeight}>적용</S.ApplyButton>
+    <>
+      <Sv col>
+        <St text="가로 픽셀" />
+        <input
+          type="number"
+          value={width}
+          onChange={(e) => setWidth(parseInt(e.target.value))}
+        />
+        <St text="세로 픽셀" />
+        <input
+          type="number"
+          value={height}
+          onChange={(e) => setHeight(parseInt(e.target.value))}
+        />
+        <S.ApplyButton onClick={applyWidthAndHeight}>적용</S.ApplyButton>
 
-      <S.PixelsContainer appliedWidth={appliedWidth} pixelSize={pixelSize}>
-        {pixels.map((pixel, index) => {
-          return (
-            <Pixel
-              onClick={() => onClickPixel(index, selectedColor)}
-              index={index}
-              x={index % appliedWidth}
-              y={Math.floor(index / appliedWidth)}
-              size={pixelSize}
-              bgColor={pixel.bgColor}
-            />
-          );
-        })}
-      </S.PixelsContainer>
-      <St text="선택한 색" mt={16} />
-      <S.ColorButton color={selectedColor} />
-      <St text="파레트" mt={16} />
-      <Sv row>
-        {colors.map((color, index) => {
-          return (
-            <S.ColorButton
-              onClick={() => setSelectedColor(colors[index])}
-              selected={selectedColor === color}
-              color={color}
-            />
-          );
-        })}
+        <S.PixelsContainer appliedWidth={appliedWidth} pixelSize={pixelSize}>
+          {pixels.map((pixel, index) => {
+            return (
+              <Pixel
+                onClick={() => onClickPixel(index, selectedColor)}
+                index={index}
+                x={index % appliedWidth}
+                y={Math.floor(index / appliedWidth)}
+                size={pixelSize}
+                bgColor={pixel.bgColor}
+              />
+            );
+          })}
+        </S.PixelsContainer>
+        <St text="선택한 색" mt={16} />
+        <S.ColorButton color={selectedColor} />
+        <St text="파레트" mt={16} />
+        <Sv row>
+          {colors.map((color, index) => {
+            return (
+              <S.ColorButton
+                onClick={() => setSelectedColor(colors[index])}
+                selected={selectedColor === color}
+                color={color}
+              />
+            );
+          })}
+        </Sv>
       </Sv>
-    </Sv>
+      <CanvasPreview
+        width={width}
+        height={height}
+        pixels={pixels}
+        setPixels={setPixels}
+      />
+    </>
   );
 };
 
