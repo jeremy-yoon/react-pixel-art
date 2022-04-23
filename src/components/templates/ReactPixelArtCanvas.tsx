@@ -24,16 +24,9 @@ export const ReactPixelArtCanvas: React.FC = () => {
   };
 
   const onClickPixel = (index: number, hex: string) => {
-    if (pixels.find((pixel) => pixel.index === index)) {
-      setPixels((prevPixels) =>
-        prevPixels.map((pixel) => {
-          if (pixel.index === index) {
-            return { ...pixel, bgColor: hex };
-          }
-          return pixel;
-        })
-      );
-    }
+    let newPixels = [...pixels];
+    newPixels[index].bgColor = hex;
+    setPixels(newPixels);
   };
 
   const applyWidthAndHeight = () => {

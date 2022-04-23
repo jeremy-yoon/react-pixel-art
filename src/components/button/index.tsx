@@ -21,7 +21,7 @@ export const Pixel: React.FC<PixelProps> = ({
 }) => {
   return (
     <S.Container size={size} bgColor={bgColor} onClick={onClick && onClick}>
-      {x},{y}
+      {/* {x},{y} */}
     </S.Container>
   );
 };
