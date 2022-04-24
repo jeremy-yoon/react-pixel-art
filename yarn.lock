@@ -2970,6 +2970,18 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
+"@tanstack/react-table@^8.0.0-alpha.45":
+  version "8.0.0-alpha.45"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.0.0-alpha.45.tgz#d79d50fcf45606ed06512ac7cf721adf7bb266b9"
+  integrity sha512-4GLf0c/IyueHwC48TACFu3fpC/kTGKjgszgjxqlgpMapgYlQO6PvvRtBaiqB5e3TP8OtGXNWtMV+YXuaD1sAFg==
+  dependencies:
+    "@tanstack/table-core" "8.0.0-alpha.45"
+
+"@tanstack/table-core@8.0.0-alpha.45":
+  version "8.0.0-alpha.45"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.0.0-alpha.45.tgz#a61cad5c14824680729057e5857b7b087de09c43"
+  integrity sha512-Rq7xwOMjwapCIQM4rUTm8J3J+YGjY6jnFbx1q3xR6AOML8170ad1GY6cX5MXTmrxbzAoTIR452rqRI1pZTMw1w==
+
 "@testing-library/dom@^7.28.1":
   version "7.31.2"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.31.2.tgz#df361db38f5212b88555068ab8119f5d841a8c4a"
@@ -12444,6 +12456,11 @@ react-syntax-highlighter@^13.5.3:
     lowlight "^1.14.0"
     prismjs "^1.21.0"
     refractor "^3.1.0"
+
+react-table@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.7.0.tgz#e2ce14d7fe3a559f7444e9ecfe8231ea8373f912"
+  integrity sha512-jBlj70iBwOTvvImsU9t01LjFjy4sXEtclBovl3mTiqjz23Reu0DKnRza4zlLtOPACx6j2/7MrQIthIK1Wi+LIA==
 
 react-textarea-autosize@^8.3.0:
   version "8.3.3"
