@@ -40,24 +40,12 @@ const PixelsContainer: React.FC<PixelsContainerProps> = ({
     repeatPixel();
   }, []);
 
+  useEffect(() => {
+    console.log("pixels", pixels);
+  }, [pixels]);
+
   //table
-  const data = React.useMemo(
-    () => [
-      {
-        col1: "Hello",
-        col2: "World",
-      },
-      {
-        col1: "react-table",
-        col2: "rocks",
-      },
-      {
-        col1: "whatever",
-        col2: "you want",
-      },
-    ],
-    []
-  );
+  const data = React.useMemo(() => pixels, []);
 
   const columns = React.useMemo(
     () => [
@@ -73,32 +61,12 @@ const PixelsContainer: React.FC<PixelsContainerProps> = ({
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+  const { rows, prepareRow } = useTable({ columns, data });
 
   return (
     <S.PixelsContainer appliedWidth={appliedWidth} pixelSize={pixelSize}>
-      <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps()}
-                  style={{
-                    borderBottom: "solid 3px red",
-                    background: "aliceblue",
-                    color: "black",
-                    fontWeight: "bold",
-                  }}
-                >
-                  {column.render("Header")}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
+      <table style={{ border: "solid 1px blue" }}>
+        <tbody>
           {rows.map((row) => {
             prepareRow(row);
             return (

@@ -40,17 +40,24 @@ const ReactPixelArtCanvas: React.FC = () => {
 
   const [selectedColor, setSelectedColor] = useState("red");
 
-  // const applyWidthAndHeight = () => {
-  //   setAppliedWidth(width);
-  //   setAppliedHeight(height);
-  //   repeatPixel();
-  // };
+  const repeatPixel = () => {
+    setPixels([]);
+    for (let i = 0; i < appliedWidth * appliedHeight; i++) {
+      setPixels((prevPixels) => [...prevPixels, { index: i }]);
+    }
+  };
 
-  // useEffect(() => {
-  //   if (appliedWidth === width && appliedHeight === height) {
-  //     repeatPixel();
-  //   }
-  // }, [appliedWidth, appliedHeight]);
+  const applyWidthAndHeight = () => {
+    setAppliedWidth(width);
+    setAppliedHeight(height);
+    repeatPixel();
+  };
+
+  useEffect(() => {
+    if (appliedWidth === width && appliedHeight === height) {
+      repeatPixel();
+    }
+  }, [appliedWidth, appliedHeight]);
 
   // useEffect(() => {
   //   console.log(pixels);
@@ -71,7 +78,7 @@ const ReactPixelArtCanvas: React.FC = () => {
           value={height}
           onChange={(e) => setHeight(parseInt(e.target.value))}
         />
-        {/* <S.ApplyButton onClick={applyWidthAndHeight}>적용</S.ApplyButton> */}
+        <S.ApplyButton onClick={applyWidthAndHeight}>적용</S.ApplyButton>
 
         <PixelsContainer
           appliedWidth={appliedWidth}
