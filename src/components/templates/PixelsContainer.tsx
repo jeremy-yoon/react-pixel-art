@@ -17,8 +17,6 @@ const PixelsContainer: React.FC<PixelsContainerProps> = ({
   appliedWidth,
   appliedHeight,
   selectedColor,
-  // pixels,
-  // setPixels,
 }) => {
   const [pixelSize, setPixelSize] = useState(20);
   const [pixels, setPixels] = useState([]);
